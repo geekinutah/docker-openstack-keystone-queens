@@ -1,0 +1,51 @@
+[DEFAULT]
+admin_token = G8tujV9IACJb3MK96gdFSFoL
+admin_endpoint = http://{{env['HOST_ADDRESS'].rstrip()}}:35357
+secure_proxy_ssl_header = HTTP_X_FORWARDED_PROTO
+debug = True
+verbose = True
+use_stderr = True
+public_port=5000
+admin_bind_host={{env['HOST_ADDRESS']}}
+public_bind_host={{env['HOST_ADDRESS']}}
+use_syslog_rfc_format=True
+admin_port=35357
+notification_topics=notifications
+notification_driver=messaging
+
+[cache]
+#backend = keystone.cache.memcache_pool
+#enabled = True
+#memcache_servers = 10.10.32.15:11211,10.10.32.19:11211,172.17.0.3:11211
+#memcache_dead_retry = 60
+#memcache_socket_timeout = 1
+#memcache_pool_maxsize = 1000
+#memcache_pool_unused_timeout = 60
+
+[catalog]
+template_file = /etc/keystone/default_catalog.templates
+driver = sql
+
+[database]
+connection = mysql://keystone:QpzpmlPSmXrljRAK4IuBcGrG@{{env['MYSQL_HOST']}}/keystone?charset=utf8&read_timeout=60
+idle_timeout = 3600
+max_pool_size = 30
+max_retries = -1
+max_overflow = 60
+
+[eventlet_server]
+public_workers = 1
+admin_workers = 1
+
+[fernet_tokens]
+key_repository = /etc/keystone/fernet-keys
+
+[identity]
+driver = keystone.identity.backends.sql.Identity
+
+[oslo_messaging_rabbit]
+rabbit_host = {{env['RABBIT_HOST']}}
+#rabbit_hosts = 10.10.32.34:5673,10.10.32.11:5673,10.10.32.24:5673
+#rabbit_userid = nova
+#rabbit_password = PQwUhzpEoTV9j0ltieiuQ9zC
+#rabbit_ha_queues = True
