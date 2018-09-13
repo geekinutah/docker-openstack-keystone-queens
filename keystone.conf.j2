@@ -27,7 +27,7 @@ template_file = /etc/keystone/default_catalog.templates
 driver = sql
 
 [database]
-connection = mysql://keystone:QpzpmlPSmXrljRAK4IuBcGrG@{{env['MYSQL_HOST']}}/keystone?charset=utf8&read_timeout=60
+connection = mysql+pymsql://keystone:QpzpmlPSmXrljRAK4IuBcGrG@{{env['MYSQL_HOST']}}/keystone?charset=utf8&read_timeout=60
 idle_timeout = 3600
 max_pool_size = 30
 max_retries = -1
